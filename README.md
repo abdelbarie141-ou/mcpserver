@@ -21,12 +21,12 @@ Clone the repo
   git clone https://github.com/YOUR_USERNAME/mcp-server.git
   cd mcp-server
 
-
+---
 Install dependencies
 
   npm install
 
-
+---
 Add .env file (never commit your secrets)
 
   PORT=3000
