@@ -60,13 +60,13 @@ Send a POST request to /mcp with a tool name and input data:
 ```
 ### Supported tools (examples):
 
-  run_n8n → calls n8n workflow webhook
+  - run_n8n → calls n8n workflow webhook
 
-  send_telegram → sends a message via Telegram bot
+  - send_telegram → sends a message via Telegram bot
 
-  gemini → calls Gemini API
+  - gemini → calls Gemini API
 
-  tavily → calls Tavily API
+  - tavily → calls Tavily API
 
 ### 🛡 Environment Variables
 
