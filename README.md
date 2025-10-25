@@ -70,37 +70,37 @@ Send a POST request to /mcp with a tool name and input data:
 
 ### 🛡 Environment Variables
 
-  N8N_WEBHOOK → URL of your n8n workflow webhook
+  - N8N_WEBHOOK → URL of your n8n workflow webhook
 
-  GEMINI_TOKEN → Gemini API key
+  - GEMINI_TOKEN → Gemini API key
 
-  TAVILY_TOKEN → Tavily API key
+  - TAVILY_TOKEN → Tavily API key
 
-  TELEGRAM_TOKEN → Telegram bot token
+  - TELEGRAM_TOKEN → Telegram bot token
 
 Tip: Never put secrets directly in code. Use .env and process.env.
 
 ### 🧩 Adding New Tools
 
 Create a new file in /tools:
-
+```
 // tools/mytool.js
 export async function runMyTool(input) {
   // Your code here
   return { type: "response", data: input };
 }
-
+```
 
 ### Import it in server.js:
-
+```
   import { runMyTool } from "./tools/mytool.js";
 
   if (tool === "mytool") {
     const result = await runMyTool(input);
     return res.json(result);
   }
-
+```
 ### 📦 Deploy
 
- Render: set environment variables in the Render dashboard.
- Docker: mount .env or set environment variables.
+ - Render: set environment variables in the Render dashboard.
+ - Docker: mount .env or set environment variables.
