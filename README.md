@@ -14,7 +14,7 @@ designed to connect your **AI models**, **Render hosting**, and **n8n workflows*
 
 ---
 
-##⚙️ Setup
+## ⚙️ Setup
 
 Clone the repo
 ```
@@ -44,7 +44,7 @@ Start the MCP server
 
 The server runs on http://localhost:3000 by default.
 
-##🚀 Usage
+## 🚀 Usage
 
 Send a POST request to /mcp with a tool name and input data:
 ```
@@ -58,7 +58,7 @@ Send a POST request to /mcp with a tool name and input data:
   }'
 
 ```
-###Supported tools (examples):
+### Supported tools (examples):
 
   run_n8n → calls n8n workflow webhook
 
@@ -68,7 +68,7 @@ Send a POST request to /mcp with a tool name and input data:
 
   tavily → calls Tavily API
 
-###🛡 Environment Variables
+### 🛡 Environment Variables
 
   N8N_WEBHOOK → URL of your n8n workflow webhook
 
@@ -80,7 +80,7 @@ Send a POST request to /mcp with a tool name and input data:
 
 Tip: Never put secrets directly in code. Use .env and process.env.
 
-###🧩 Adding New Tools
+### 🧩 Adding New Tools
 
 Create a new file in /tools:
 
@@ -91,7 +91,7 @@ export async function runMyTool(input) {
 }
 
 
-###Import it in server.js:
+### Import it in server.js:
 
   import { runMyTool } from "./tools/mytool.js";
 
@@ -100,7 +100,7 @@ export async function runMyTool(input) {
     return res.json(result);
   }
 
-###📦 Deploy
+### 📦 Deploy
 
  Render: set environment variables in the Render dashboard.
  Docker: mount .env or set environment variables.
