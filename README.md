@@ -14,40 +14,40 @@ designed to connect your **AI models**, **Render hosting**, and **n8n workflows*
 
 ---
 
-⚙️ Setup
+##⚙️ Setup
 
 Clone the repo
-
+```
   git clone https://github.com/YOUR_USERNAME/mcp-server.git
   cd mcp-server
-
+```
 ---
 Install dependencies
-
+```
   npm install
-
+```
 ---
 Add .env file (never commit your secrets)
-
+```
   PORT=3000
   N8N_WEBHOOK=https://YOUR_N8N_URL/webhook/from-mcp
   GEMINI_TOKEN=your_gemini_api_key
   TAVILY_TOKEN=your_tavily_api_key
   TELEGRAM_TOKEN=your_telegram_bot_token
-
+```
 
 Start the MCP server
-
+```
   npm run build   # Compile TypeScript if needed
   npm start
-
+```
 
 The server runs on http://localhost:3000 by default.
 
-🚀 Usage
+##🚀 Usage
 
 Send a POST request to /mcp with a tool name and input data:
-
+```
   curl -X POST http://localhost:3000/mcp \
   -H "Content-Type: application/json" \
   -d '{
@@ -57,8 +57,8 @@ Send a POST request to /mcp with a tool name and input data:
     }
   }'
 
-
-Supported tools (examples):
+```
+###Supported tools (examples):
 
   run_n8n → calls n8n workflow webhook
 
@@ -68,7 +68,7 @@ Supported tools (examples):
 
   tavily → calls Tavily API
 
-🛡 Environment Variables
+###🛡 Environment Variables
 
   N8N_WEBHOOK → URL of your n8n workflow webhook
 
@@ -80,7 +80,7 @@ Supported tools (examples):
 
 Tip: Never put secrets directly in code. Use .env and process.env.
 
-🧩 Adding New Tools
+###🧩 Adding New Tools
 
 Create a new file in /tools:
 
@@ -91,7 +91,7 @@ export async function runMyTool(input) {
 }
 
 
-Import it in server.js:
+###Import it in server.js:
 
   import { runMyTool } from "./tools/mytool.js";
 
@@ -100,7 +100,7 @@ Import it in server.js:
     return res.json(result);
   }
 
-📦 Deploy
+###📦 Deploy
 
  Render: set environment variables in the Render dashboard.
  Docker: mount .env or set environment variables.
