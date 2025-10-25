@@ -1,13 +1,19 @@
 import fetch from "node-fetch";
 
-export async function handleTelegram(input) {
-  const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
-  const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
-  const response = await fetch(url, {
+export async function sendTelegram(input) {
+  const token = process.env.TELEGRAM_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID; // fixed chat
+  const message = input.message || "Hello from MCP Server!";
+
+  const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: input.chat_id, text: input.message }),
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: message,
+    }),
   });
+
   const data = await response.json();
   return { type: "response", data };
 }
