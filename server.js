@@ -1,41 +1,36 @@
 import express from "express";
-import fetch from "node-fetch";
+import { handleTelegram } from "./tools/telegram.js";
+import { handleN8n } from "./tools/n8n.js";
+import { handlegemini } from "./tools/gemini.js";
+import { handletavily } from "./tools/tavily.js";
+
+// add imports for each new app
 
 const app = express();
 app.use(express.json());
 
-// Example endpoint the AI will call
 app.post("/mcp", async (req, res) => {
   const { tool, input } = req.body;
 
-  // Example: trigger an n8n webhook
-  if (tool === "run_workflow") {
-    try {
-      const response = await fetch("https://YOUR_N8N_URL/webhook/from-mcp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(input),
-      });
-
-      const data = await response.json();
-      return res.json({ type: "response", data });
-    } catch (err) {
-      return res.status(500).json({ error: "Failed to call n8n", details: err.message });
+  try {
+    switch (tool) {
+      case "telegram_api":
+        return res.json(await handleTelegram(input));
+      case "run_n8n":
+        return res.json(await handleN8n(input));
+      case "gemini_api":
+        return res.json(await handlegemini(input));
+      case "tavily_api":
+        return res.json(await handletavily(input));
+        
+      // add more cases here...
+      default:
+        return res.json({ type: "error", message: "Unknown tool" });
     }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ type: "error", message: err.message });
   }
-
-  // Example local tool
-  if (tool === "hello") {
-    return res.json({ type: "response", data: `👋 Hello ${input.name || "friend"}!` });
-  }
-
-  res.status(400).json({ error: "Unknown tool" });
 });
 
-// Root route
-app.get("/", (req, res) => {
-  res.send("✅ MCP Server running successfully!");
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`🚀 MCP Server running on port ${PORT}`));
+app.listen(3000, () => console.log("🚀 MCP Server ready"));
