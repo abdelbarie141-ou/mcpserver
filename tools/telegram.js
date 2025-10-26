@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-export async function sendTelegram(input) {
+export async function handleTelegram(input) {
   const token = process.env.TELEGRAM_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID; // fixed chat
   const message = input.message || "Hello from MCP Server!";
