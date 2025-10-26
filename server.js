@@ -1,6 +1,5 @@
 import express from "express";
 import { handleTelegram } from "./tools/telegram.js";
-import { handleN8n } from "./tools/n8n.js";
 import { handlegemini } from "./tools/gemini.js";
 import { handletavily } from "./tools/tavily.js";
 
@@ -16,8 +15,6 @@ app.post("/mcp", async (req, res) => {
     switch (tool) {
       case "telegram_api":
         return res.json(await handleTelegram(input));
-      case "run_n8n":
-        return res.json(await handleN8n(input));
       case "gemini_api":
         return res.json(await handlegemini(input));
       case "tavily_api":
